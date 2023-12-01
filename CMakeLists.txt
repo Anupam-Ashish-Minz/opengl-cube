@@ -18,6 +18,6 @@ set(HEADERS
 set(CMAKE_BUILD_TYPE Debug)
 add_executable(cube ${SOURCES} ${HEADERS})
 target_link_libraries(cube 
-	glfw GLEW EGL GL OpenGL
+	glfw GLEW EGL GL OpenGL m
 )
 

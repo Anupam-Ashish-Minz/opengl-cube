@@ -1,5 +1,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 ///
@@ -77,10 +78,16 @@ int main() {
 	glLinkProgram(program);
 	glUseProgram(program);
 
-	int fragmentScreenSize = glGetUniformLocation(program, "screenSize");
-	glUniform2f(fragmentScreenSize, WINDOW_WIDTH, WINDOW_HEIGHT);
+	int fs_screenSize = glGetUniformLocation(program, "screenSize");
+	glUniform2f(fs_screenSize, WINDOW_WIDTH, WINDOW_HEIGHT);
+	float timeValue;
+	float sinWave;
+	int fs_sinWave = glGetUniformLocation(program, "sinWave");
 
 	while (!glfwWindowShouldClose(window)) {
+		timeValue = glfwGetTime();
+		sinWave = (sin(timeValue * 2)) - 0.5f;
+		glUniform1f(fs_sinWave, sinWave);
 		glClear(GL_COLOR_BUFFER_BIT);
 		// glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
