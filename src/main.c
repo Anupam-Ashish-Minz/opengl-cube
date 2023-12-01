@@ -4,6 +4,15 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
+					 GLsizei length, const GLchar *message,
+					 const void *userParams) {
+	fprintf(stderr,
+			"GL CALLBACK: %s type = 0x%x, severity = 0x%x, message: %s\n",
+			(type == GL_DEBUG_TYPE_ERROR) ? "** GL ERROR **" : "", type,
+			severity, message);
+}
+
 void handlerInput(GLFWwindow *window) {
 	// physical buttons
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
@@ -22,6 +31,10 @@ int main() {
 		fprintf(stderr, "failed to init glew\n");
 		return -1;
 	}
+
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(MessageCallback, 0);
+
 	GLuint vertexArray, buffer;
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
