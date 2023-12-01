@@ -1,28 +1,34 @@
+#include <GL/glew.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ShaderFile {
-	char *buf;
-	size_t size;
-};
+#define SH_ERR_MAX_LEN 1000
 
-struct ShaderFile *readFile(const char *path) {
+GLuint readShader(const char *path, GLenum shaderType) {
 	FILE *f = fopen(path, "r");
-	struct ShaderFile *sf =
-		(struct ShaderFile *)malloc(sizeof(struct ShaderFile));
+	char *buf;
+	char log[SH_ERR_MAX_LEN];
+	size_t fileSize;
+	int status, logLen;
+
 	if (f == NULL) {
-		fprintf(stderr, "file not found\n");
 		return NULL;
 	}
 	fseek(f, 0, SEEK_END);
-	sf->size = ftell(f);
+	fileSize = ftell(f);
 	fseek(f, 0, SEEK_SET);
-	sf->buf = (char *)malloc(sf->size);
-	fread(sf->buf, sf->size, 1, f);
-	return sf;
-}
+	buf = (char *)malloc(fileSize);
+	fread(buf, fileSize, 1, f);
 
-void readShader(const char *path) {
-	struct ShaderFile *sf = readFile(path);
-	printf("%s\n", sf->buf);
+	GLuint shader = glCreateShader(shaderType);
+	glShaderSource(shader, 1, (const char **)&buf, (int *)&fileSize);
+	glCompileShader(shader);
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+	if (status == GL_FALSE) {
+		glGetShaderInfoLog(shader, SH_ERR_MAX_LEN, &logLen, log);
+		fprintf(stderr, "%s shader error: %s\n",
+				shaderType == GL_VERTEX_SHADER ? "vertex" : "fragement", log);
+		return 0;
+	}
+	return shader;
 }

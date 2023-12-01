@@ -25,11 +25,16 @@ int main() {
 		1.0f,  -1.0f, 0.0f, ///
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
-
-	readShader("shaders/vertex.glsl");
-
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
+
+	GLuint vs = readShader("shaders/vertex.glsl", GL_VERTEX_SHADER);
+	GLuint fs = readShader("shaders/fragment.glsl", GL_FRAGMENT_SHADER);
+	GLuint program = glCreateProgram();
+	glAttachShader(program, vs);
+	glAttachShader(program, fs);
+	glLinkProgram(program);
+	glUseProgram(program);
 
 	while (!glfwWindowShouldClose(window)) {
 		glfwSwapBuffers(window);
