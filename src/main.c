@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 int main() {
-	readShader("shaders/vertex.glsl");
-	return 0;
+	// readShader("shaders/vertex.glsl");
+	// return 0;
 
 	if (!glfwInit()) {
 		fprintf(stderr, "failed to init glfw\n");
