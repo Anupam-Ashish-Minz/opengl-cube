@@ -9,9 +9,11 @@ project(cube)
 set(SOURCES
 	src/main.c
 	src/read_shader.c
+	src/input.c
 )
 set(HEADERS
 	src/read_shader.h
+	src/input.h
 )
 set(CMAKE_BUILD_TYPE Debug)
 add_executable(cube ${SOURCES} ${HEADERS})

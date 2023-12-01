@@ -1,8 +1,10 @@
-#include "read_shader.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
 #include <stdio.h>
+///
+#include "input.h"
+#include "read_shader.h"
 
 void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
 					 GLsizei length, const GLchar *message,
@@ -11,13 +13,6 @@ void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
 			"GL CALLBACK: %s type = 0x%x, severity = 0x%x, message: %s\n",
 			(type == GL_DEBUG_TYPE_ERROR) ? "** GL ERROR **" : "", type,
 			severity, message);
-}
-
-void handlerInput(GLFWwindow *window) {
-	// physical buttons
-	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
-	}
 }
 
 int main() {
@@ -77,7 +72,7 @@ int main() {
 		// glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		handlerInput(window);
+		inputHandler(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
