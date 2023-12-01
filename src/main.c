@@ -32,11 +32,22 @@ int main() {
 		+0.75f, -0.75f, 0.0f, ///
 		-0.75f, +0.75f, 0.0f, ///
 		///
-		-0.75f, +0.75f, 0.0f, ///
-		+0.75f, -0.75f, 0.0f, ///
+		// -0.75f, +0.75f, 0.0f, ///
+		// +0.75f, -0.75f, 0.0f, ///
 		+0.75f, +0.75f, 0.0f, ///
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
+
+	unsigned int indexes[6] = {
+		0, 1, 2, ///
+		2, 1, 3, ///
+	};
+	GLuint ebo;
+	glGenBuffers(1, &ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes,
+				 GL_STATIC_DRAW);
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
 
@@ -50,7 +61,9 @@ int main() {
 
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		handlerInput(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
