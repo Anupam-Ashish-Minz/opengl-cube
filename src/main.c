@@ -19,10 +19,14 @@ int main() {
 	glBindVertexArray(vertexArray);
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	GLfloat data[9] = {
-		-1.0f, -1.0f, 0.0f, ///
-		0.0f,  1.0f,  0.0f, ///
-		1.0f,  -1.0f, 0.0f, ///
+	GLfloat data[18] = {
+		-0.75f, -0.75f, 0.0f, ///
+		+0.75f, -0.75f, 0.0f, ///
+		-0.75f, +0.75f, 0.0f, ///
+		///
+		-0.75f, +0.75f, 0.0f, ///
+		+0.75f, -0.75f, 0.0f, ///
+		+0.75f, +0.75f, 0.0f, ///
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
@@ -40,7 +44,7 @@ int main() {
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
 
 	return 0;
