@@ -4,7 +4,7 @@
 #include <stdio.h>
 ///
 #include "input.h"
-#include "read_shader.h"
+#include "shader.h"
 
 void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
 					 GLsizei length, const GLchar *message,

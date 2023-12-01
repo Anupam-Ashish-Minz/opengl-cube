@@ -8,11 +8,11 @@ cmake_minimum_required (VERSION 3.27)
 project(cube)
 set(SOURCES
 	src/main.c
-	src/read_shader.c
+	src/shader.c
 	src/input.c
 )
 set(HEADERS
-	src/read_shader.h
+	src/shader.h
 	src/input.h
 )
 set(CMAKE_BUILD_TYPE Debug)
