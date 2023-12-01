@@ -47,7 +47,7 @@ void rotateZ(float rad, float *x, float *y, float *z) {
 
 void rotate3PArray(float rad, enum ROT_DIRECTION direction, float points[],
 				   int pointsLen) {
-	for (int i = 0; i < pointsLen - 3; i += 3) {
+	for (int i = 0; i < pointsLen - 2; i += 3) {
 		if (direction == ROT_X) {
 			rotateX(rad, &points[i], &points[i + 1], &points[i + 2]);
 		} else if (direction == ROT_Y) {

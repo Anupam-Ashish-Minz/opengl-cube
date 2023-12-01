@@ -1,5 +1,7 @@
 #include <GLFW/glfw3.h>
 #include <stdbool.h>
+///
+#include "input.h"
 
 void inputHandler(GLFWwindow *window) {
 	// physical buttons

@@ -1,8 +1,8 @@
 #include <GL/glew.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#define SH_ERR_MAX_LEN 1000
+///
+#include "shader.h"
 
 GLuint readShader(const char *path, GLenum shaderType) {
 	FILE *f = fopen(path, "r");
