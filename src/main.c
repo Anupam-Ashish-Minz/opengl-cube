@@ -41,16 +41,17 @@ int main() {
 	glBindVertexArray(vertexArray);
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	GLfloat data[24] = {
-		-0.75f, -0.75f, 0.0f, ///
-		+0.75f, -0.75f, 0.0f, ///
-		-0.75f, +0.75f, 0.0f, ///
-		+0.75f, +0.75f, 0.0f, ///
+	GLfloat data[48] = {
+		// pos(x,y,z), normals(x,y,z)
+		-0.75f, -0.75f, 0.0f, 0.0f, 0.0f, 0.0f, ///
+		+0.75f, -0.75f, 0.0f, 0.0f, 0.0f, 0.0f, ///
+		-0.75f, +0.75f, 0.0f, 0.0f, 0.0f, 0.0f, ///
+		+0.75f, +0.75f, 0.0f, 0.0f, 0.0f, 0.0f, ///
 		///
-		-0.75f, -0.75f, 0.75f, ///
-		+0.75f, -0.75f, 0.75f, ///
-		-0.75f, +0.75f, 0.75f, ///
-		+0.75f, +0.75f, 0.75f, ///
+		-0.75f, -0.75f, 0.75f, 0.0f, 0.0f, 0.0f, ///
+		+0.75f, -0.75f, 0.75f, 0.0f, 0.0f, 0.0f, ///
+		-0.75f, +0.75f, 0.75f, 0.0f, 0.0f, 0.0f, ///
+		+0.75f, +0.75f, 0.75f, 0.0f, 0.0f, 0.0f, ///
 	};
 	// rotate3PArray(M_PI / 4, ROT_Y, data, 24);
 	// rotate3PArray(M_PI / 4, ROT_X, data, 24);
@@ -70,7 +71,7 @@ int main() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes,
 				 GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
 
 	GLuint vs = readShader("shaders/vertex.glsl", GL_VERTEX_SHADER);
@@ -81,18 +82,8 @@ int main() {
 	glLinkProgram(program);
 	glUseProgram(program);
 
-	int fs_screenSize = glGetUniformLocation(program, "screenSize");
-	glUniform2f(fs_screenSize, WINDOW_WIDTH, WINDOW_HEIGHT);
-	float timeValue;
-	float sinWave;
-	int fs_sinWave = glGetUniformLocation(program, "sinWave");
-
 	while (!glfwWindowShouldClose(window)) {
-		timeValue = glfwGetTime();
-		sinWave = (sin(timeValue * 2)) - 0.5f;
-		glUniform1f(fs_sinWave, sinWave);
 		glClear(GL_COLOR_BUFFER_BIT);
-		// glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		inputHandler(window);
