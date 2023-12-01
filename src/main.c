@@ -46,6 +46,6 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
-
+	glfwTerminate();
 	return 0;
 }
