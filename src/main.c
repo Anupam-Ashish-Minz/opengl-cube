@@ -41,10 +41,10 @@ int main() {
 	glUseProgram(program);
 
 	while (!glfwWindowShouldClose(window)) {
-		glfwSwapBuffers(window);
-		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glfwSwapBuffers(window);
+		glfwPollEvents();
 	}
 	glfwTerminate();
 	return 0;
