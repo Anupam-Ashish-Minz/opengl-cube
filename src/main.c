@@ -4,9 +4,6 @@
 #include <stdio.h>
 
 int main() {
-	// readShader("shaders/vertex.glsl");
-	// return 0;
-
 	if (!glfwInit()) {
 		fprintf(stderr, "failed to init glfw\n");
 		return -1;
@@ -28,6 +25,9 @@ int main() {
 		1.0f,  -1.0f, 0.0f, ///
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
+
+	readShader("shaders/vertex.glsl");
+
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
 
