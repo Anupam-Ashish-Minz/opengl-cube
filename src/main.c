@@ -6,6 +6,9 @@
 #include "input.h"
 #include "shader.h"
 
+#define WINDOW_WIDTH 500
+#define WINDOW_HEIGHT 500
+
 void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
 					 GLsizei length, const GLchar *message,
 					 const void *userParams) {
@@ -20,7 +23,8 @@ int main() {
 		fprintf(stderr, "failed to init glfw\n");
 		return -1;
 	}
-	GLFWwindow *window = glfwCreateWindow(500, 500, "cubed", NULL, NULL);
+	GLFWwindow *window =
+		glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "cubed", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "failed to init glew\n");
@@ -72,6 +76,9 @@ int main() {
 	glAttachShader(program, fs);
 	glLinkProgram(program);
 	glUseProgram(program);
+
+	int fragmentScreenSize = glGetUniformLocation(program, "screenSize");
+	glUniform2f(fragmentScreenSize, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);

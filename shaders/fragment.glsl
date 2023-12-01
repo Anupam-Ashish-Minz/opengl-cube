@@ -1,7 +1,12 @@
 #version 330
 
-out vec3 color;
+out vec4 outColor;
+uniform vec2 screenSize;
 
 void main() {
-	color = vec3(1.0, 0.0, 0.0);
+	vec2 uv = gl_FragCoord.xy / screenSize;
+	vec3 color = vec3(0.0, 0.0, 0.70);
+	color.rg = uv.xy;
+
+	outColor = vec4(color, 1.0);
 }
