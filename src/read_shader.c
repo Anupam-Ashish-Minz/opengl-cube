@@ -12,7 +12,8 @@ GLuint readShader(const char *path, GLenum shaderType) {
 	int status, logLen;
 
 	if (f == NULL) {
-		return NULL;
+		fprintf(stderr, "file not found: %s\n", path);
+		return 0;
 	}
 	fseek(f, 0, SEEK_END);
 	fileSize = ftell(f);
