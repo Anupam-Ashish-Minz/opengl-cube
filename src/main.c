@@ -1,7 +1,15 @@
 #include "read_shader.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <stdbool.h>
 #include <stdio.h>
+
+void handlerInput(GLFWwindow *window) {
+	// physical buttons
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+}
 
 int main() {
 	if (!glfwInit()) {
@@ -43,6 +51,7 @@ int main() {
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		handlerInput(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
