@@ -1,5 +1,5 @@
-#ifndef _ROTATION
-#define _ROTATION
+#ifndef _ROTATION_H
+#define _ROTATION_H
 
 enum ROT_DIRECTION {
 	ROT_X,
