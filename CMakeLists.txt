@@ -10,10 +10,12 @@ set(SOURCES
 	src/main.c
 	src/shader.c
 	src/input.c
+	src/rotation.c
 )
 set(HEADERS
 	src/shader.h
 	src/input.h
+	src/rotation.h
 )
 set(CMAKE_BUILD_TYPE Debug)
 add_executable(cube ${SOURCES} ${HEADERS})

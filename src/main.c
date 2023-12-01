@@ -5,6 +5,7 @@
 #include <stdio.h>
 ///
 #include "input.h"
+#include "rotation.h"
 #include "shader.h"
 
 #define WINDOW_WIDTH 500
@@ -51,6 +52,8 @@ int main() {
 		-0.75f, +0.75f, 0.75f, ///
 		+0.75f, +0.75f, 0.75f, ///
 	};
+	// rotate3PArray(M_PI / 4, ROT_Y, data, 24);
+	// rotate3PArray(M_PI / 4, ROT_X, data, 24);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
 
 	unsigned int indexes[36] = {
