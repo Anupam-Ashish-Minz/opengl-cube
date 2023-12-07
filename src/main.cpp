@@ -1,13 +1,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 ///
-#include "input.h"
-#include "rotation.h"
-#include "shader.h"
-#include "transforms.h"
+// #include "input.h"
+// #include "rotation.h"
+#include "shader.hpp"
+// #include "transforms.h"
 
 #define WINDOW_WIDTH 500
 #define WINDOW_HEIGHT 500
@@ -103,7 +104,7 @@ int main() {
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 		// glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		inputHandler(window);
+		// inputHandler(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}

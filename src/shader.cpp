@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 ///
-#include "shader.h"
+#include "shader.hpp"
 
 GLuint readShader(const char *path, GLenum shaderType) {
 	FILE *f = fopen(path, "r");

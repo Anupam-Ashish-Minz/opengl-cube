@@ -1,27 +1,15 @@
-# what im looking for 
-# set compiler to gcc
-# set main file to main.c
-# link glfw3 glew 
-# build the project
-
 cmake_minimum_required (VERSION 3.27)
 project(cube)
 set(SOURCES
-	src/main.c
-	src/shader.c
-	src/input.c
-	src/rotation.c
-	src/transforms.c
+	src/main.cpp
+	src/shader.cpp
 )
 set(HEADERS
-	src/shader.h
-	src/input.h
-	src/rotation.h
-	src/transforms.h
+	src/shader.hpp
 )
 set(CMAKE_BUILD_TYPE Debug)
 add_executable(cube ${SOURCES} ${HEADERS})
 target_link_libraries(cube 
-	glfw cglm GLEW EGL GL OpenGL m
+	glfw GLEW EGL GL OpenGL m 
 )
 
