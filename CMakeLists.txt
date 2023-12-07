@@ -11,15 +11,17 @@ set(SOURCES
 	src/shader.c
 	src/input.c
 	src/rotation.c
+	src/transforms.c
 )
 set(HEADERS
 	src/shader.h
 	src/input.h
 	src/rotation.h
+	src/transforms.h
 )
 set(CMAKE_BUILD_TYPE Debug)
 add_executable(cube ${SOURCES} ${HEADERS})
 target_link_libraries(cube 
-	glfw GLEW EGL GL OpenGL m
+	glfw cglm GLEW EGL GL OpenGL m
 )
 
