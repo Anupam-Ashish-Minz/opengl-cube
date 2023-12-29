@@ -44,16 +44,17 @@ int main() {
 	glBindVertexArray(vertexArray);
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	unsigned int data[32] = {
-		0, 0, 1, ///
-		0, 1, 1, ///
-		1, 0, 1, ///
-		1, 1, 1, ///
+
+	float data[32] = {
+		0.0f, 0.0f, 0.5f, ///
+		0.0f, 1.0f, 0.5f, ///
+		1.0f, 0.0f, 0.5f, ///
+		1.0f, 1.0f, 0.5f, ///
 		///
-		0, 0, 0, ///
-		0, 1, 0, ///
-		1, 0, 0, ///
-		1, 1, 0, ///
+		0.0f, 0.0f, -0.5f, ///
+		0.0f, 1.0f, -0.5f, ///
+		1.0f, 0.0f, -0.5f, ///
+		1.0f, 1.0f, -0.5f, ///
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
 
@@ -75,10 +76,7 @@ int main() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes,
 				 GL_STATIC_DRAW);
 
-	// glVertexAttribPointer(0, 3, GL_UNSIGNED_INT, GL_FALSE,
-	// 					  3 * sizeof(unsigned int), 0);
-	glVertexAttribPointer(0, 3, GL_UNSIGNED_INT, GL_FALSE,
-						  3 * sizeof(unsigned int), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 
 	GLuint vs = readShader("shaders/vertex.glsl", GL_VERTEX_SHADER);
@@ -93,7 +91,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 		// glDrawArrays(GL_TRIANGLES, 0, 3);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		// inputHandler(window);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
