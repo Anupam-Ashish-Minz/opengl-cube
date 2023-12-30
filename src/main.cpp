@@ -6,10 +6,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 ///
-// #include "input.h"
-// #include "rotation.h"
 #include "shader.hpp"
-// #include "transforms.h"
 
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 1024
@@ -98,13 +95,12 @@ int main() {
 	unsigned int uView = glGetUniformLocation(program, "view");
 	unsigned int uProj = glGetUniformLocation(program, "projection");
 
+	glm::mat4 unit = glm::mat4(1.0f);
 	glm::mat4 model = glm::mat4(1.0f);
-	glm::mat4 view = glm::mat4(1.0f);
-	glm::mat4 proj = glm::mat4(1.0f);
-	view = glm::translate(view, glm::vec3(-0.5f, -0.5f, -3.0f));
-	proj = glm::perspective(glm::radians(45.0f),
-							(float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f,
-							100.0f);
+	glm::mat4 view = glm::translate(unit, glm::vec3(-0.5f, -0.5f, -3.0f));
+	glm::mat4 proj = glm::perspective(
+		glm::radians(45.0f), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f,
+		100.0f);
 
 	glUniformMatrix4fv(uView, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(uProj, 1, GL_FALSE, glm::value_ptr(proj));
@@ -113,17 +109,12 @@ int main() {
 		glfwPollEvents();
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// glBindVertexArray(VAO);
-		// glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		model = glm::mat4(1.0f);
-		model = glm::rotate(model, (float)glfwGetTime(),
+		model = glm::rotate(unit, (float)glfwGetTime(),
 							glm::vec3(0.5f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uModel, 1, GL_FALSE, glm::value_ptr(model));
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		// inputHandler(window);
 
 		glfwSwapBuffers(window);
 	}
