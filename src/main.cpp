@@ -59,12 +59,23 @@ int main() {
 	glBufferData(GL_ARRAY_BUFFER, sizeof(data), &data, GL_STATIC_DRAW);
 
 	unsigned int indexes[36] = {
-		0, 1, 2, 2, 3, 1, /// front face
-		4, 5, 6, 6, 7, 4, /// back
-		0, 4, 1, 1, 5, 4, /// top
-		3, 6, 4, 4, 7, 6, /// bottom
-		0, 4, 6, 6, 2, 0, /// left
-		2, 5, 7, 7, 3, 2  /// right
+		0, 1, 2, ///
+		2, 3, 1, ///
+		///
+		4, 5, 6, ///
+		6, 7, 5, ///
+		///
+		0, 4, 2, ///
+		2, 5, 4, ///
+		///
+		1, 5, 3, ///
+		3, 7, 5, ///
+		///
+		0, 1, 4, ///
+		4, 5, 1, ///
+		///
+		2, 3, 6, ///
+		6, 7, 3, ///
 	};
 	GLuint EBO;
 	glGenBuffers(1, &EBO);
