@@ -11,8 +11,8 @@
 #include "shader.hpp"
 // #include "transforms.h"
 
-#define WINDOW_WIDTH 500
-#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 1024
 
 void MessageCallback(GLenum source, GLenum type, GLenum id, GLenum severity,
 					 GLsizei length, const GLchar *message,
